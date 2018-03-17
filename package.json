@@ -1,0 +1,30 @@
+{
+  "name": "projectgdrpg",
+  "version": "1.0.0",
+  "description": "rpg test build",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lightnet/projectgdrpg.git"
+  },
+  "keywords": [
+    "godot",
+    "nodejs"
+  ],
+  "author": "Lightnet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lightnet/projectgdrpg/issues"
+  },
+  "homepage": "https://github.com/Lightnet/projectgdrpg#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8"
+  }
+}

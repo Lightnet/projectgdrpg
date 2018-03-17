@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://rpgscripts/CtrlBattleTurnBase.gd" type="Script" id=1]
-[ext_resource path="res://rpgscripts/rpgcharacter.gd" type="Script" id=2]
+[ext_resource path="res://prefabs/LBCharacterPawn.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -14,89 +14,7 @@ subdivide_depth = 0
 
 extents = Vector3( 1, 1, 1 )
 
-[sub_resource type="CapsuleShape" id=3]
-
-radius = 1.0
-height = 1.0
-
-[sub_resource type="CapsuleMesh" id=4]
-
-radius = 1.0
-mid_height = 1.0
-radial_segments = 64
-rings = 8
-
-[sub_resource type="PlaneMesh" id=5]
-
-size = Vector2( 2, 2 )
-subdivide_width = 0
-subdivide_depth = 0
-
-[sub_resource type="ViewportTexture" id=6]
-
-resource_local_to_scene = true
-flags = 0
-viewport_path = NodePath("Spatial/KinematicBody/Viewport")
-
-[sub_resource type="SpatialMaterial" id=8]
-
-resource_local_to_scene = true
-render_priority = 0
-flags_transparent = false
-flags_unshaded = true
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = true
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 1
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 1
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = SubResource( 6 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = true
-emission = Color( 0, 0, 0, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Albedo", "Ambient Occlusion", "Anisotropy", "Clearcoat", "Depth", "Detail", "Distance Fade", "Emission", "Flags", "Metallic", "NormalMap", "Parameters", "Proximity Fade", "Refraction", "Resource", "Rim", "Roughness", "Subsurf Scatter", "Transmission", "UV1", "UV2", "Vertex Color" ]
-
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -108,7 +26,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Control" type="Control" parent="CanvasLayer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -165,7 +82,7 @@ scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ScrollContainer" index="2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ScrollContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -372,10 +289,11 @@ text = "Escape"
 flat = false
 align = 1
 
-[node name="Spatial" type="Spatial" parent="." index="1"]
+[node name="World" type="Spatial" parent="." index="1"]
 
-[node name="Ground" type="StaticBody" parent="Spatial" index="0"]
+[node name="Ground" type="StaticBody" parent="World" index="0"]
 
+editor/display_folded = true
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -387,7 +305,7 @@ constant_linear_velocity = Vector3( 0, 0, 0 )
 constant_angular_velocity = Vector3( 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial/Ground" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="World/Ground" index="0"]
 
 layers = 1
 material_override = null
@@ -402,14 +320,14 @@ mesh = SubResource( 1 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="Spatial/Ground" index="1"]
+[node name="CollisionShape" type="CollisionShape" parent="World/Ground" index="1"]
 
 shape = SubResource( 2 )
 disabled = false
 
-[node name="Camera" type="Camera" parent="Spatial" index="1"]
+[node name="Camera" type="Camera" parent="World" index="1"]
 
-transform = Transform( 1, 0, 0, 0, 0.951737, 0.306914, 0, -0.306914, 0.951737, 0, 7.6169, 11.069 )
+transform = Transform( 1, 0, 0, 0, 0.951737, 0.306914, 0, -0.306914, 0.951737, 0, 5.78223, 7.86763 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -423,134 +341,35 @@ size = 1.0
 near = 0.05
 far = 100.0
 
-[node name="KinematicBody" type="KinematicBody" parent="Spatial" index="2"]
+[node name="Characters" type="Spatial" parent="World" index="2"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55541, 2.90783, 0 )
-input_ray_pickable = true
-input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
-axis_lock_linear_x = false
-axis_lock_linear_y = true
-axis_lock_linear_z = false
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-collision/safe_margin = 0.001
-script = ExtResource( 2 )
+[node name="LBCharacterPawn" parent="World/Characters" index="0" instance=ExtResource( 2 )]
 
-[node name="CollisionShape" type="CollisionShape" parent="Spatial/KinematicBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55541, 2.90783, 0.476811 )
+TeamID = 1.0
+IsDead = false
+IsEndTurn = false
 
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 3 )
-disabled = false
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="LBCharacterPawn2" parent="World/Characters" index="1" instance=ExtResource( 2 )]
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial/KinematicBody" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59109, 2.90783, 0.89618 )
+IsDead = false
+IsEndTurn = false
 
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 4 )
-skeleton = NodePath("..")
-material/0 = null
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnAction" to="CanvasLayer/Control" method="_on_BtnAction_pressed"]
 
-[node name="Viewport" type="Viewport" parent="Spatial/KinematicBody" index="2"]
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnMove" to="CanvasLayer/Control" method="_on_BtnMove_pressed"]
 
-arvr = false
-size = Vector2( 160, 160 )
-own_world = false
-world = null
-transparent_bg = false
-msaa = 0
-hdr = false
-disable_3d = false
-usage = 0
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
-render_target_update_mode = 2
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
-_sections_unfolded = [ "GUI", "Render Target", "Rendering" ]
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnAttack" to="CanvasLayer/Control" method="_on_BtnAttack_pressed"]
 
-[node name="Control2" type="Control" parent="Spatial/KinematicBody/Viewport" index="0"]
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnDefense" to="CanvasLayer/Control" method="_on_BtnDefense_pressed"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnSkills" to="CanvasLayer/Control" method="_on_BtnSkills_pressed"]
 
-[node name="ProgressBar" type="ProgressBar" parent="Spatial/KinematicBody/Viewport/Control2" index="0"]
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnItems" to="CanvasLayer/Control" method="_on_BtnItems_pressed"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 20.0
-margin_right = 150.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
-min_value = 0.0
-max_value = 100.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
-rounded = false
-percent_visible = true
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnEnd" to="CanvasLayer/Control" method="_on_BtnEnd_pressed"]
 
-[node name="MeshInstance2" type="MeshInstance" parent="Spatial/KinematicBody" index="3"]
-
-transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 2.6289, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
-skeleton = NodePath("..")
-material/0 = SubResource( 8 )
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
+[connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnEscape2" to="CanvasLayer/Control" method="_on_BtnEscape2_pressed"]
 
 
