@@ -2,8 +2,6 @@
 
 Created by: Lightnet
 
-Status: Work in progress...
-
 # Information:
  To build role playing game for story build work in 2.5D world.
 

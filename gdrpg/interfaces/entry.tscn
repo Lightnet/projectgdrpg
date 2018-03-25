@@ -1,0 +1,311 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Interfaces/MenuEntry.gd" type="Script" id=1]
+
+[node name="Node" type="Node" index="0"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="ctrl_mainmenu" type="Control" parent="CanvasLayer" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/ctrl_mainmenu" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 430.0
+margin_top = 10.0
+margin_right = 600.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Alpha Build"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ctrl_mainmenu" index="1"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 50.0
+margin_right = 180.0
+margin_bottom = 250.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Rect" ]
+
+[node name="BtnCampaign" type="Button" parent="CanvasLayer/ctrl_mainmenu/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 160.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Campaign"
+flat = false
+align = 1
+
+[node name="BtnTraining" type="Button" parent="CanvasLayer/ctrl_mainmenu/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 160.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Training"
+flat = false
+align = 1
+
+[node name="BtnMultiplayers" type="Button" parent="CanvasLayer/ctrl_mainmenu/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 48.0
+margin_right = 160.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Multiplayers"
+flat = false
+align = 1
+
+[node name="BtnOptions" type="Button" parent="CanvasLayer/ctrl_mainmenu/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Options"
+flat = false
+align = 1
+
+[node name="BtnQuit" type="Button" parent="CanvasLayer/ctrl_mainmenu/VBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 116.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit"
+flat = false
+align = 1
+
+[node name="WDQuit" type="WindowDialog" parent="CanvasLayer/ctrl_mainmenu" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 380.0
+margin_top = 230.0
+margin_right = 680.0
+margin_bottom = 370.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = true
+window_title = ""
+resizable = false
+_sections_unfolded = [ "Popup" ]
+
+[node name="LContent" type="Label" parent="CanvasLayer/ctrl_mainmenu/WDQuit" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Do want to quit game??"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="BtnOkay" type="Button" parent="CanvasLayer/ctrl_mainmenu/WDQuit" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 110.0
+margin_right = 140.0
+margin_bottom = 130.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Okay"
+flat = false
+align = 1
+
+[node name="BtnCancel" type="Button" parent="CanvasLayer/ctrl_mainmenu/WDQuit" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_top = 110.0
+margin_right = 280.0
+margin_bottom = 130.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Cancel"
+flat = false
+align = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer" index="1"]
+
+stream = null
+volume_db = 0.0
+autoplay = true
+mix_target = 0
+bus = "Musics"
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/VBoxContainer/BtnCampaign" to="CanvasLayer/ctrl_mainmenu" method="_on_BtnCampaign_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/VBoxContainer/BtnTraining" to="CanvasLayer/ctrl_mainmenu" method="_on_BtnTraining_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/VBoxContainer/BtnMultiplayers" to="CanvasLayer/ctrl_mainmenu" method="_on_BtnMultiplayers_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/VBoxContainer/BtnOptions" to="CanvasLayer/ctrl_mainmenu" method="_on_BtnOptions_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/VBoxContainer/BtnQuit" to="CanvasLayer/ctrl_mainmenu" method="_on_BtnQuit_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/WDQuit/BtnOkay" to="CanvasLayer/ctrl_mainmenu" method="_on_QuitBtnOkay_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/ctrl_mainmenu/WDQuit/BtnCancel" to="CanvasLayer/ctrl_mainmenu" method="_on_QuitBtnCancel_pressed"]
+
+

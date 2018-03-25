@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://rpgscripts/CtrlBattleTurnBase.gd" type="Script" id=1]
-[ext_resource path="res://prefabs/LBCharacterPawn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rpgscripts/rpgcharacter.gd" type="Script" id=2]
+[ext_resource path="res://sprite2d/characters/characterph/characterph.png" type="Texture" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -13,6 +14,88 @@ subdivide_depth = 0
 [sub_resource type="BoxShape" id=2]
 
 extents = Vector3( 1, 1, 1 )
+
+[sub_resource type="CapsuleShape" id=3]
+
+radius = 1.0
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id=4]
+
+radius = 1.0
+mid_height = 1.0
+radial_segments = 64
+rings = 8
+
+[sub_resource type="PlaneMesh" id=5]
+
+size = Vector2( 2, 2 )
+subdivide_width = 0
+subdivide_depth = 0
+
+[sub_resource type="ViewportTexture" id=6]
+
+resource_local_to_scene = true
+flags = 0
+viewport_path = NodePath("World/Characters/LBCharacterPawn/Viewport")
+
+[sub_resource type="SpatialMaterial" id=7]
+
+resource_local_to_scene = true
+render_priority = 0
+flags_transparent = false
+flags_unshaded = true
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = true
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 1
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = SubResource( 6 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Ambient Occlusion", "Anisotropy", "Clearcoat", "Depth", "Detail", "Distance Fade", "Emission", "Flags", "Metallic", "NormalMap", "Parameters", "Proximity Fade", "Refraction", "Resource", "Rim", "Roughness", "Subsurf Scatter", "Transmission", "UV1", "UV2", "Vertex Color" ]
 
 [node name="Main" type="Node"]
 
@@ -87,7 +170,6 @@ scroll_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ScrollContainer" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -295,8 +377,6 @@ align = 1
 
 [node name="World" type="Spatial" parent="." index="1"]
 
-editor/display_folded = true
-
 [node name="Ground" type="StaticBody" parent="World" index="0"]
 
 editor/display_folded = true
@@ -331,9 +411,183 @@ material/0 = null
 shape = SubResource( 2 )
 disabled = false
 
-[node name="Camera" type="Camera" parent="World" index="1"]
+[node name="Characters" type="Spatial" parent="World" index="1"]
 
-transform = Transform( 1, 0, 0, 0, 0.951737, 0.306914, 0, -0.306914, 0.951737, 0, 5.78223, 7.86763 )
+[node name="LBCharacterPawn" type="KinematicBody" parent="World/Characters" index="0" groups=[
+"character",
+]]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0972619, 2.90783, 0.476811 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+axis_lock_linear_x = false
+axis_lock_linear_y = true
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+collision/safe_margin = 0.001
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+TeamID = 1.0
+PartyID = 0
+bController = true
+bTurnBase = false
+IsDead = false
+IsEndTurn = false
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Characters/LBCharacterPawn" index="0"]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 3 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="World/Characters/LBCharacterPawn" index="1"]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 4 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform", "material" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Viewport" type="Viewport" parent="World/Characters/LBCharacterPawn" index="2"]
+
+editor/display_folded = true
+arvr = false
+size = Vector2( 160, 160 )
+own_world = false
+world = null
+transparent_bg = false
+msaa = 0
+hdr = false
+disable_3d = false
+usage = 0
+debug_draw = 0
+render_target_v_flip = false
+render_target_clear_mode = 0
+render_target_update_mode = 2
+audio_listener_enable_2d = false
+audio_listener_enable_3d = false
+physics_object_picking = false
+gui_disable_input = false
+gui_snap_controls_to_pixels = true
+shadow_atlas_size = 0
+shadow_atlas_quad_0 = 2
+shadow_atlas_quad_1 = 2
+shadow_atlas_quad_2 = 3
+shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "GUI", "Render Target", "Rendering" ]
+
+[node name="Control2" type="Control" parent="World/Characters/LBCharacterPawn/Viewport" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="World/Characters/LBCharacterPawn/Viewport/Control2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 150.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 100.0
+exp_edit = false
+rounded = false
+percent_visible = true
+
+[node name="MeshInstance2" type="MeshInstance" parent="World/Characters/LBCharacterPawn" index="3"]
+
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 2.6289, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 5 )
+skeleton = NodePath("..")
+material/0 = SubResource( 7 )
+_sections_unfolded = [ "Geometry", "Transform", "material" ]
+
+[node name="Sprite3D" type="Sprite3D" parent="World/Characters/LBCharacterPawn" index="4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.806982, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+centered = true
+offset = Vector2( 0, 0 )
+flip_h = false
+flip_v = false
+modulate = Color( 1, 1, 1, 1 )
+opacity = 1.0
+pixel_size = 0.01
+axis = 2
+transparent = true
+shaded = false
+double_sided = true
+alpha_cut = 0
+texture = ExtResource( 3 )
+vframes = 1
+hframes = 1
+frame = 0
+region_enabled = false
+region_rect = Rect2( 0, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="World/Characters/LBCharacterPawn" index="5"]
+
+transform = Transform( 1, 0, 0, 0, 0.951737, 0.306914, 0, -0.306914, 0.951737, -0.0972619, 2.8744, 7.39082 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -341,26 +595,11 @@ h_offset = 0.0
 v_offset = 0.0
 doppler_tracking = 0
 projection = 0
-current = false
+current = true
 fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-
-[node name="Characters" type="Spatial" parent="World" index="2"]
-
-[node name="LBCharacterPawn" parent="World/Characters" index="0" instance=ExtResource( 2 )]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55541, 2.90783, 0.476811 )
-TeamID = 1.0
-bController = false
-bTurnBase = false
-
-[node name="LBCharacterPawn2" parent="World/Characters" index="1" instance=ExtResource( 2 )]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59109, 2.90783, 0.89618 )
-bController = false
-bTurnBase = false
 
 [connection signal="pressed" from="CanvasLayer/Control/ScrollContainer/VBoxContainer/BtnAction" to="CanvasLayer/Control" method="_on_BtnAction_pressed"]
 
