@@ -11,13 +11,14 @@ config_version=3
 [application]
 
 config/name="Project GD RPG"
-run/main_scene="res://levels/PrototypeDungeon.tscn"
+run/main_scene="res://levels/Travel02.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 settings="*res://scripts/settings.gd"
 gamemode="*res://scripts/gamemode.gd"
+gamemanagement="*res://scripts/gamemanagement.gd"
 
 [editor_plugins]
 
@@ -37,6 +38,13 @@ Left=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","
  ]
 Right=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
+
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="player"
+3d_physics/layer_3="enemy"
+3d_physics/layer_4="wall"
 
 [rendering]
 

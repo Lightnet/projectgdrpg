@@ -24,6 +24,15 @@ var status = statusClass.new()
 export (bool) var IsDead = false
 export (bool) var IsEndTurn = false
 
+
+
+
+
+
+
+
+
+
 func movecheck(delta):
 	var dir = Vector3() # Where does the player intend to walk to
 	var xform = get_global_transform()
@@ -59,12 +68,15 @@ func movecheck(delta):
 	
 	pass
 
+func do_the_printing(body):
+   print("collision hapened")
 
 
 func _ready():
 	progressbar = get_node("Viewport/Control2/ProgressBar")
 	#print(status)
 	status = statusClass.new()
+	#connect("body_entered",self,"do_the_printing")
 	pass
 	
 func _input(event):
@@ -79,7 +91,14 @@ func _input(event):
 	pass
 	
 func _physics_process(delta):
+	
+	
 	movecheck(delta)
+	
+	#if is_colliding():
+		#print("K collision")
+	
+	
 	pass
 
 func _process(delta):
