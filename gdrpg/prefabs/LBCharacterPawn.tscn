@@ -21,7 +21,7 @@ size = Vector2( 2, 2 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[sub_resource type="ViewportTexture" id=6]
+[sub_resource type="ViewportTexture" id=4]
 
 resource_local_to_scene = true
 flags = 0
@@ -52,7 +52,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = SubResource( 6 )
+albedo_texture = SubResource( 4 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -226,7 +226,7 @@ _sections_unfolded = [ "Geometry", "Transform", "material" ]
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="4"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.806982, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.724963, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1

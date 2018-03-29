@@ -15,7 +15,7 @@ subdivide_depth = 0
 
 extents = Vector3( 1, 1, 1 )
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -264,11 +264,11 @@ material/0 = null
 shape = SubResource( 2 )
 disabled = false
 
-[node name="TravelPoint01" parent="." index="2" instance=ExtResource( 3 )]
+[node name="TravelPoint1" parent="." index="2" instance=ExtResource( 3 )]
 
 transform = Transform( -0.0515701, 0, 0.998669, 0, 1, 0, -0.998669, 0, -0.0515701, 7.94657, 1, 0.178365 )
 sceneid = "res://levels/Travel02.tscn"
-teleportid = "TravelPoint01"
-travelPointId = "TravelPoint01"
+teleportid = "TravelPoint1"
+travelPointId = "TravelPoint1"
 
 
