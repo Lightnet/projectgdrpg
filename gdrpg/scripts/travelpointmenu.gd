@@ -1,5 +1,27 @@
 extends RigidBody
 
+#class a:
+	#export var b = 0
+	#func _init():
+		#print("test")
+
+#export(a) var custom_export
+
+#var MapListClass = get_script("res://scripts/travelpointmenu.gd")
+#var MapListClass = preload("res://scripts/travelpointmenu.gd")
+
+#class MapListClassSub:
+	#const _var1 = "test"
+
+#export (MapListClass) var TravelList
+#export (MapListClassSub) var TravelList
+#export var TravelList = MapListClassSub()
+
+export var strings = PoolStringArray()
+export(int, "Warrior", "Magician", "Thief") var character_class
+export(String, "Rebecca", "Mary", "Leah") var character_name
+
+
 export (String, FILE) var sceneid
 #export (String) var teleportid = "TravelPoint01"
 export (String) var travelPointId = "TravelPoint1"
