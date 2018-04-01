@@ -18,7 +18,7 @@ subdivide_depth = 0
 
 extents = Vector3( 1, 1, 1 )
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 sceneName = "Travel02"
@@ -337,8 +337,6 @@ teleportPointId = "TeleportPoint1"
 [node name="TravelPointMenu1" parent="." index="5" instance=ExtResource( 6 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.2475, -3 )
-strings = PoolStringArray( "travel01", "travel02" )
-character_class = null
-character_name = null
+travelListFile = "res://database/travels/travelmap01.json"
 
 

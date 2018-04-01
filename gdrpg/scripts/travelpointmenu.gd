@@ -17,20 +17,21 @@ extends RigidBody
 #export (MapListClassSub) var TravelList
 #export var TravelList = MapListClassSub()
 
-export var strings = PoolStringArray()
-export(int, "Warrior", "Magician", "Thief") var character_class
-export(String, "Rebecca", "Mary", "Leah") var character_name
+#export var strings = PoolStringArray()
+#export(int, "Warrior", "Magician", "Thief") var character_class
+#export(String, "Rebecca", "Mary", "Leah") var character_name
 
 
-export (String, FILE) var sceneid
+#export (String, FILE) var sceneid
 #export (String) var teleportid = "TravelPoint01"
-export (String) var travelPointId = "TravelPoint1"
+#export (String) var travelPointId = "TravelPoint1"
+
+export (String, FILE) var travelListFile 
+
 export (bool) var btravel = true
 var characterPawn = preload("res://prefabs/LBCharacterPawn.tscn")
-
 var travelMenu = preload("res://interfaces/ui_travellist.tscn")
 var ui_TravelList
-
 
 var excludes = []
 var currentobj
@@ -64,7 +65,11 @@ func _input(event):
 			var ui_travellist = get_tree().get_root().get_node("Main/CanvasLayer/ui_travellist")
 			if ui_travellist == null:
 				ui_TravelList = travelMenu.instance()
+				ui_TravelList.travelmapfile = travelListFile
+				
 				get_tree().get_root().get_node("Main/CanvasLayer").add_child(ui_TravelList)
+				
+				
 		pass
 	#pass
 

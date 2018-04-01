@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/ui_travellist.gd" type="Script" id=1]
 
-[node name="ui_travellist" type="Control" index="0"]
+[node name="ui_travellist" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

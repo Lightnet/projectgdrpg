@@ -23,7 +23,7 @@ func _ready():
 
 func set_travel(sceneid, teleportid):
 	print("game m > travel")
-	print(sceneid,teleportid)
+	print(sceneid," > ", teleportid)
 	
 	if sceneid != null:
 		bspawn = true

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scripts/gameworld.gd" type="Script" id=1]
-[ext_resource path="res://prefabs/LBCharacterPawn.tscn" type="PackedScene" id=2]
-[ext_resource path="res://prefabs/TravelPoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/nodeworld.gd" type="Script" id=1]
+[ext_resource path="res://scripts/gameworld.gd" type="Script" id=2]
+[ext_resource path="res://prefabs/LBCharacterPawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/TravelPointMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/travelpointmenu.gd" type="Script" id=5]
+[ext_resource path="res://prefabs/TravelPoint.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -16,6 +19,20 @@ subdivide_depth = 0
 extents = Vector3( 1, 1, 1 )
 
 [node name="Main" type="Node" index="0"]
+
+script = ExtResource( 1 )
+sceneName = "Travel01"
+sceneDescription = ""
+travelMapList = {
+"Travel01": {
+"nodepath": "Travel01",
+"nodepoint": "res://levels/Travel02.tscn"
+},
+"Travel02": {
+"nodepath": "res://levels/Travel01.tscn",
+"nodepoint": "TravelPointMenu1"
+}
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -85,11 +102,11 @@ max_lines_visible = -1
 
 [node name="World" type="Spatial" parent="." index="1"]
 
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Characters" type="Spatial" parent="World" index="0"]
 
-[node name="LBCharacterPawn" parent="World/Characters" index="0" instance=ExtResource( 2 )]
+[node name="LBCharacterPawn" parent="World/Characters" index="0" instance=ExtResource( 3 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.955016, 2.89594, 1.0381 )
 
@@ -233,6 +250,7 @@ disabled = false
 
 [node name="Ground2" type="StaticBody" parent="World/scene1" index="4"]
 
+editor/display_folded = true
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -264,7 +282,40 @@ material/0 = null
 shape = SubResource( 2 )
 disabled = false
 
-[node name="TravelPoint1" parent="." index="2" instance=ExtResource( 3 )]
+[node name="TravelPointMenu1" type="RigidBody" parent="." index="2" instance=ExtResource( 4 )]
+
+transform = Transform( -0.0515701, 0, 0.998669, 0, 1, 0, -0.998669, 0, -0.0515701, 1.40183, 3.49957, -5.4821 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 0
+collision_mask = 8
+mode = 1
+mass = 0.01
+friction = 0.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = true
+contacts_reported = 4
+contact_monitor = true
+sleeping = false
+can_sleep = false
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = true
+axis_lock_angular_z = false
+linear_velocity = Vector3( 0, 0, 0 )
+linear_damp = -1.0
+angular_velocity = Vector3( 0, 0, 0 )
+angular_damp = -1.0
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform", "Visibility", "collision" ]
+travelListFile = "res://database/travels/travelmap01.json"
+btravel = true
+
+[node name="TravelPoint1" parent="." index="3" instance=ExtResource( 6 )]
 
 transform = Transform( -0.0515701, 0, 0.998669, 0, 1, 0, -0.998669, 0, -0.0515701, 7.94657, 1, 0.178365 )
 sceneid = "res://levels/Travel02.tscn"

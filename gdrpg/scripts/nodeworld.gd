@@ -6,15 +6,13 @@ export var sceneDescription = ""
 #export var travelMapList = {}
 
 export var travelMapList = {
-	"node01":{
-		"nodename":"Travel01",
+	"Travel01":{
 		"nodepath":"Travel01",
-		"nodepoint":"Travel01"
+		"nodepoint":"res://levels/Travel02.tscn"
 	},
-	"node02":{
-		"nodename":"Travel02",
-		"nodepath":"Travel02",
-		"nodepoint":"Travel02"
+	"Travel02":{
+		"nodepath":"res://levels/Travel01.tscn",
+		"nodepoint":"TravelPointMenu1"
 	}
 }
 
@@ -33,8 +31,8 @@ func loadTravelMapList():
 	travelMapList = parse_json(text)
 	file.close()
 	# print something from the dictionnary for testing.
-	print(travelMapList["node01"])
-	print(travelMapList)
+	#print(travelMapList["node01"])
+	#print(travelMapList)
 	
 	pass
 
