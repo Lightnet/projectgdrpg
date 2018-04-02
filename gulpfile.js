@@ -6,6 +6,9 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var gutil = require('gulp-util');
 var connect = require('gulp-connect');
+
+var browserSync = require('browser-sync');
+var nodemon = require('gulp-nodemon');
 //const WebSocket = require('ws');
 //var io = require('socket.io')
 
@@ -27,10 +30,12 @@ var godotModuleDir = godotPath + '/modules';
 //===============================================
 
 gulp.task('connect', function() {
+  /*
   var app = connect.server({
     root: './dist',
     livereload: true
   });
+  */
   /*
   var io = require('socket.io')(app.server);
   io.on('connection', function(socket) {
@@ -91,6 +96,8 @@ gulp.task('watch', function() {
   //gulp.watch('styles/main.scss', ['sass']);
   //gulp.watch(jsSources, ['godot3_js']);
   //gulp.watch(['modules/**/*.h','modules/**/*.cpp','modules/**/*.py','modules/**/SCsub'], ['modules']);
+  
+
   gulp.watch('src/index.html', ['copy']);
   gulp.watch('src/index.css', ['css']);
 });
@@ -103,7 +110,31 @@ gulp.task('copy_godot_javascript', function() {
   .pipe(gulp.dest(outputDir));
 });
 
+gulp.task('browser-sync', ['nodemon'], function() {
+	browserSync.init(null, {
+		proxy: "http://localhost:8080",
+        files: ["dist/**/*.*"],
+        //browser: "google chrome",
+        port: 7000,
+	});
+});
+gulp.task('nodemon', function (cb) {
+	
+	var started = false;
+	
+	return nodemon({
+		script: 'app.js'
+	}).on('start', function () {
+		// to avoid nodemon being started multiple times
+		// thanks @matthisk
+		if (!started) {
+			cb();
+			started = true; 
+		} 
+	});
+});
+
 // create a default task and just log a message
-gulp.task('default', ['copy_godot_javascript','godot3_js','copy','css','connect','watch'] , function() {
+gulp.task('default', ['browser-sync','copy_godot_javascript','godot3_js','copy','css','connect','watch'] , function() {
   return gutil.log('Gulp is running!');
 });

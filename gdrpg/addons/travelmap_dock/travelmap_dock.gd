@@ -3,42 +3,39 @@ extends EditorPlugin
 
 var TravelInfoClass = preload("res://addons/travelmap_dock/ui_traveldata.tscn")
 
-var travelmaplist = {
-	"travel01":{
-		"mappath":"Travel01",
-		"mappoint":"Travel01"
+var travelMapList = {
+	"Travel01":{
+		"nodepath":"res://levels/Travel01.tscn",
+		"nodepoint":"TravelPointMenu1"
 	},
-	"travel02":{
-		"mappath":"Travel01",
-		"mappoint":"Travel01"
+	"Travel02":{
+		"nodepath":"res://levels/Travel02.tscn",
+		"nodepoint":"TravelPointMenu1"
 	}
 }
 
-var travelname = "Travel03"
+var travelname = "Travelmap03.json"
 var path = "res://database/travels/"
+var travelpath = path + travelname
 
-	
 func _init():
-	#add_export_plugin(SomeFrameworkExportPlugin.new())
 	print("init export?")
 	pass
 
 var dock # A class member to hold the dock during the plugin lifecycle
 
 func setup():
-
 	var BtnNew = dock.get_node("BtnNew")
 	BtnNew.connect("pressed", self, "new_travelmap")
-
 	var BtnSave = dock.get_node("BtnSave")
-	BtnSave.connect("pressed", self, "load_travelmap")
-
+	BtnSave.connect("pressed", self, "save_travelmap")
 	var btnload = dock.get_node("BtnLoad")
-	btnload.connect("pressed", self, "save_travelmap")
-
+	btnload.connect("pressed", self, "load_travelmap")
 	var LEPath = dock.get_node("LEFileName")
 	LEPath.text = path + travelname
 
+	var btnnewdata = dock.get_node("BtnNewData")
+	btnnewdata.connect("pressed", self, "new_traveldata")
 	#pass
 
 func TravelListPressed(arg):
@@ -48,58 +45,123 @@ func TravelListPressed(arg):
 	#arg[1].info #this would be buttonMessage
 	pass
 
-func new_travelmap():
-	#var travellist = dock.get_node("HBCTravelMapList")
-	#var button = Button.new()
-	#button.text = "test"
-	#var arg = []
-	#arg.append(button)
-	#arg.append("Travel01")
-	#arg.append("test")
-	#print(arg)
-	#button.connect("pressed", self, "TravelListPressed", [arg])
-	#travellist.add_child(button)
+func travelUpdatePressed(arg):
+	print("update data")
+	print(arg[0])
+	print(arg[1])
 
-	var travellist = dock.get_node("ScrollContainer/HBCTravelMapList")
+	var traveldata = arg[0]
 
-	for travel in travelmaplist:
-		print(travel)
-		#var button = Button.new()
-		var traveldata = TravelInfoClass.instance()
-		
-		#button.text = travel
-		var arg = []
-		arg.append(traveldata)
-		arg.append(travel)
-		arg.append(travelmaplist[travel])
-		#arg.append("Travel01")
-		#arg.append("test")
-		#print(arg)
-		#button.connect("pressed", self, "TravelListPressed", [arg])
+	var mapname = traveldata.get_node("HBoxContainer2/LEName")
+	#mapname.text = travel
+	var mappath = traveldata.get_node("HBoxContainer3/LEPath")
+	#mappath.text = travelMapList[travel]["nodepath"]
+	var mappoint = traveldata.get_node("HBoxContainer4/LEPoint")
+	#mappoint.text = travelMapList[travel]["nodepoint"]
 
-		var mapname = traveldata.get_node("LEName")
-		mapname.text = travel
-
-		travellist.add_child(traveldata)
-
-		#var gscript = button.get_node(".").get_script()
-		#gscript.set_data(travel,travelmaplist[travel])
+	if arg[1] == mapname.text:
+		travelMapList[arg[1]]["nodepath"] = String(mapname.text)
+		travelMapList[arg[1]]["nodepoint"] = String(mappoint.text)
+		pass
+	else:
+		travelMapList[arg[1]] = null
+		var mapName = String(mapname.text)
+		travelMapList[mapName] = {"nodepath":String(mapname.text),"nodepoint":String(mappoint.text)}
 
 		pass
 
+	print(travelMapList)
+	pass
+
+func travelDeletePressed(arg):
+	print("delete data")
+	#travelMapList
+	#print(arg[0])
+	#print(arg[1])
+	#travelMapList[arg[1]] = null
+
+	for traveldata in travelMapList:
+		if traveldata == arg[1]:
+			travelMapList.erase(traveldata)
+		pass
+
+	updateTravelList()
+	pass
+
+func updateTravelList():
+	var travellist = dock.get_node("ScrollContainer/HBCTravelMapList")
+
+	for uinode in travellist.get_children():
+		uinode.queue_free()
+	print("..... data")
+	for travel in travelMapList:
+		print(travel)
+		if travelMapList[travel] == null:
+			return
+
+		var traveldata = TravelInfoClass.instance()
+		
+		var arg = []
+		arg.append(traveldata)
+		arg.append(travel)
+		arg.append(travelMapList[travel])
+
+		print("traveldata")
+		print(travelMapList[travel])
+
+		var BtnUpdate = traveldata.get_node("HBoxContainer/BtnUpdate")
+		BtnUpdate.connect("pressed", self, "travelUpdatePressed", [arg])
+		var BtnDelete = traveldata.get_node("HBoxContainer/BtnDelete")
+		BtnDelete.connect("pressed", self, "travelDeletePressed", [arg])
+		var mapname = traveldata.get_node("HBoxContainer2/LEName")
+		mapname.text = travel
+		var mappath = traveldata.get_node("HBoxContainer3/LEPath")
+		if travelMapList[travel]["nodepath"] != null:
+			mappath.text = travelMapList[travel]["nodepath"]
+		var mappoint = traveldata.get_node("HBoxContainer4/LEPoint")
+		mappoint.text = travelMapList[travel]["nodepoint"]
+
+		travellist.add_child(traveldata)
+	pass
+
+func new_travelmap():
+	#var travellist = dock.get_node("ScrollContainer/HBCTravelMapList")
+	travelMapList = {
+		"Travel01":{
+			"nodepath":"",
+			"nodepoint":"TravelPointMenu1"
+		}
+	}
+
+	updateTravelList()
 	#pass
 
 func load_travelmap():
-
+	var LEPath = dock.get_node("LEFileName")
+	travelpath = String(LEPath.text)
+	#print(travelpath)
+	var file = File.new()
+	file.open(travelpath, file.READ)
+	var text = file.get_as_text()
+	travelMapList = parse_json(text)
+	file.close()
+	#print(travelMapList)
+	updateTravelList()
 	pass
 
 func save_travelmap():
-	
+	var file = File.new()
+	file.open(travelpath, File.WRITE)
+	file.store_string(to_json(travelMapList))
+	file.close()
+	print("Save Travel Scene!")
 	pass
 
 func new_traveldata():
-
-
+	travelMapList["travel"] = {}
+	travelMapList["travel"]["nodepath"] = "none"
+	travelMapList["travel"]["nodepoint"] = "TravelPointMenu1"
+	updateTravelList()
 	pass
 
 func _enter_tree():

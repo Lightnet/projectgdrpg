@@ -19,7 +19,8 @@ export var travelMapList = {
 func saveTravelMapList():
 	var file = File.new()
 	file.open("res://database/travels/travelmap02.json", File.WRITE)
-	file.store_line(to_json(travelMapList))
+	#file.store_line(to_json(travelMapList))
+	file.store_string(to_json(travelMapList))
 	file.close()
 	
 	pass

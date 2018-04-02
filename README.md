@@ -19,3 +19,7 @@ Created by: Lightnet
 
 # Notes:
  * Different drive build will not work when export file.
+
+
+# ref:
+ * https://stackoverflow.com/questions/48836909/gulp-nodemon-and-express
