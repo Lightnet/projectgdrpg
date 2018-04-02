@@ -13,7 +13,10 @@ var nodemon = require('gulp-nodemon');
 //var io = require('socket.io')
 
 var outputDir = 'dist';
-var jsSources = ['src/godot_client.js','src/godot_js.js'];
+var jsSources = [
+  'src/godot_client.js',
+  'src/godot_js.js'
+];
 
 //===============================================
 // GODOT Engine
@@ -61,7 +64,7 @@ gulp.task('connect', function() {
 */
 });
 
-gulp.task('js', function() {
+gulp.task('src_js', function() {
   gulp.src(jsSources)
   .pipe(uglify())
   .pipe(concat('script.js'))
@@ -69,7 +72,7 @@ gulp.task('js', function() {
   .pipe(connect.reload())
 });
 
-gulp.task('godot3_js', function() {
+gulp.task('godot_js', function() {
   gulp.src(jsSources)
   //.pipe(uglify())
   //.pipe(concat('script.js'))
@@ -77,12 +80,12 @@ gulp.task('godot3_js', function() {
   .pipe(connect.reload())
 });
 
-gulp.task('copy', function() {
+gulp.task('copy_html', function() {
   gulp.src('src/index.html')
   .pipe(gulp.dest(outputDir))
 });
 
-gulp.task('modules', function() {
+gulp.task('godot_modules', function() {
   gulp.src(['modules/**/*.h','modules/**/*.cpp','modules/**/*.py','modules/**/SCsub'])
   .pipe(gulp.dest(godotModuleDir))
 });
@@ -95,10 +98,9 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
   //gulp.watch('styles/main.scss', ['sass']);
   //gulp.watch(jsSources, ['godot3_js']);
-  //gulp.watch(['modules/**/*.h','modules/**/*.cpp','modules/**/*.py','modules/**/SCsub'], ['modules']);
-  
+  //gulp.watch(['modules/**/*.h','modules/**/*.cpp','modules/**/*.py','modules/**/SCsub'], ['godot_modules']);
 
-  gulp.watch('src/index.html', ['copy']);
+  gulp.watch('src/index.html', ['copy_html']);
   gulp.watch('src/index.css', ['css']);
 });
 
@@ -112,12 +114,13 @@ gulp.task('copy_godot_javascript', function() {
 
 gulp.task('browser-sync', ['nodemon'], function() {
 	browserSync.init(null, {
-		proxy: "http://localhost:8080",
-        files: ["dist/**/*.*"],
-        //browser: "google chrome",
-        port: 7000,
+		proxy: "http://localhost:3000",
+    files: ["dist/**/*.*"]//,
+    //browser: "google chrome",
+    //port: 7000
 	});
 });
+
 gulp.task('nodemon', function (cb) {
 	
 	var started = false;
@@ -135,6 +138,7 @@ gulp.task('nodemon', function (cb) {
 });
 
 // create a default task and just log a message
-gulp.task('default', ['browser-sync','copy_godot_javascript','godot3_js','copy','css','connect','watch'] , function() {
+//gulp.task('default', ['browser-sync','copy_godot_javascript','godot3_js','copy_html','css','connect','watch'] , function() {
+gulp.task('default', ['browser-sync','copy_godot_javascript','godot_js','copy_html','css','watch'] , function() {
   return gutil.log('Gulp is running!');
 });
