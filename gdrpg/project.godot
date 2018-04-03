@@ -22,7 +22,7 @@ gamemanagement="*res://scripts/gamemanagement.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "game_export_dock", "travelmap_dock" )
+enabled=PoolStringArray( "job_dock", "travelmap_dock" )
 
 [input]
 
